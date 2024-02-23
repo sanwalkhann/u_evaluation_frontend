@@ -63,7 +63,7 @@ const AuthStore = (set) => ({
             formData.append('email', signupData.email);
             formData.append('password', signupData.password);
             formData.append('role', signupData.role);
-
+    
             if (signupData.file) {
                 console.log(signupData.file)
                 formData.append('file', signupData.file);
@@ -73,11 +73,11 @@ const AuthStore = (set) => ({
                 method: 'POST',
                 body: formData,
             });
-
+    
             // Parse the response as JSON
             const signupToken = await res.json();
             console.log(signupToken)
-
+    
             // Update the state with the received token
             set({
                 isLoggedin: true,
@@ -88,7 +88,7 @@ const AuthStore = (set) => ({
             console.log(error);
         }
     }),
-
+    
     // Function to handle user Forget Password
     forgetPassword: (forgetPasswordData) => set(async (state) => {
         try {
