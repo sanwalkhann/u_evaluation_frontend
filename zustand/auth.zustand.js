@@ -3,7 +3,7 @@ import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
 // Set domain of URL to avoid from complexity
-const domain = "https://u-evaluation-frontend.vercel.app";
+const domain = "https://u-evalutaion-backend.vercel.app/";
 // const domain = "http://localhost:3002";
 
 // Define the AuthStore function to create and manage the state of your store
@@ -57,38 +57,38 @@ const AuthStore = (set) => ({
 
     // Function to handle user signup
     signUp: (signupData) => set(async (state) => {
-        try {
-            const formData = new FormData();
-            formData.append('name', signupData.name);
-            formData.append('email', signupData.email);
-            formData.append('password', signupData.password);
-            formData.append('role', signupData.role);
-    
-            if (signupData.file) {
-                console.log(signupData.file)
-                formData.append('file', signupData.file);
-            }
-            // Make a POST request to the signup endpoint
-            const res = await fetch(`${domain}/auth/signup`, {
-                method: 'POST',
-                body: formData,
-            });
-    
-            // Parse the response as JSON
-            const signupToken = await res.json();
-            console.log(signupToken)
-    
-            // Update the state with the received token
-            set({
-                isLoggedin: true,
-                token: signupToken.token,
-                user: signupToken.user
-            });
-        } catch (error) {
-            console.log(error);
+    try {
+        const formData = new FormData();
+        formData.append('name', signupData.name);
+        formData.append('email', signupData.email);
+        formData.append('password', signupData.password);
+        formData.append('role', signupData.role);
+
+        if (signupData.file) {
+            console.log(signupData.file)
+            formData.append('file', signupData.file);
         }
-    }),
-    
+        // Make a POST request to the signup endpoint
+        const res = await fetch(`${domain}/auth/signup`, {
+            method: 'POST',
+            body: formData,
+        });
+
+        // Parse the response as JSON
+        const signupToken = await res.json();
+        console.log(signupToken)
+
+        // Update the state with the received token
+        set({
+            isLoggedin: true,
+            token: signupToken.token,
+            user: signupToken.user
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}),
+
     // Function to handle user Forget Password
     forgetPassword: (forgetPasswordData) => set(async (state) => {
         try {
