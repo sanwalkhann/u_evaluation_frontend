@@ -51,6 +51,7 @@ const AuthStore = (set) => ({
             });
         } catch (error) {
             // Log any errors that occur during the login process
+            console.log('first')
             console.error(error);
         }
     },
